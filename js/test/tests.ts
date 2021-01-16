@@ -49,3 +49,9 @@ export function whenUnicodeCodePointIsInAstralPlaneThenReturnedValueIncludesStri
 
     assert.strictEqual(result.string, "🕿");
 }
+
+export function typefaceIsCaseInsensitive() {
+    const result = dingbatToUnicode.codePoint("wingDingS", 41)!!;
+
+    assert.strictEqual(result.codePoint, 0x2706);
+}
