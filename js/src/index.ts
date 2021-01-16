@@ -28,7 +28,7 @@ export function dec(typeface: string, dec: string): UnicodeScalarValue | undefin
 }
 
 export function hex(typeface: string, hex: string): UnicodeScalarValue | undefined {
-    return dingbatsByCodePoint[typeface + "_" + parseInt(hex, 16)];
+    return codePoint(typeface, parseInt(hex, 16));
 }
 
 function fromCodePointPolyfill(codePoint: number) {
