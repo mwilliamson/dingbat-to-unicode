@@ -1,9 +1,9 @@
 import assert from "assert";
 
-import dingbatToUnicode from "../";
+import * as dingbatToUnicode from "../";
 
 export function canConvertFromHexDingbatToUnicode() {
-    const result = dingbatToUnicode({typeface: "Wingdings", hex: "29"});
+    const result = dingbatToUnicode.hex("Wingdings", "29");
 
     assert.deepStrictEqual(result, {
         codePoint: 0x2706,
@@ -11,7 +11,7 @@ export function canConvertFromHexDingbatToUnicode() {
 }
 
 export function canConvertFromUppercaseHexDingbatToUnicode() {
-    const result = dingbatToUnicode({typeface: "Wingdings", hex: "3E"});
+    const result = dingbatToUnicode.hex("Wingdings", "3E");
 
     assert.deepStrictEqual(result, {
         codePoint: 0x2707,
@@ -19,9 +19,17 @@ export function canConvertFromUppercaseHexDingbatToUnicode() {
 }
 
 export function canConvertFromLowercaseHexDingbatToUnicode() {
-    const result = dingbatToUnicode({typeface: "Wingdings", hex: "3e"});
+    const result = dingbatToUnicode.hex("Wingdings", "3e");
 
     assert.deepStrictEqual(result, {
         codePoint: 0x2707,
+    });
+}
+
+export function canConvertFromDecimalDingbatToUnicode() {
+    const result = dingbatToUnicode.dec("Wingdings", "41");
+
+    assert.deepStrictEqual(result, {
+        codePoint: 0x2706,
     });
 }

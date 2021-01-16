@@ -4,19 +4,22 @@ interface UnicodeScalarValue {
     codePoint: number;
 }
 
+const dingbatsByDec: {[key: string]: UnicodeScalarValue} = {};
 const dingbatsByHex: {[key: string]: UnicodeScalarValue} = {};
 
 for (const dingbat of dingbats) {
-    dingbatsByHex[dingbat["Typeface name"] + "_" + dingbat["Dingbat hex"]] = {
+    const scalarValue = {
         codePoint: parseInt(dingbat["Unicode dec"], 10),
     };
+
+    dingbatsByDec[dingbat["Typeface name"] + "_" + dingbat["Dingbat dec"]] = scalarValue;
+    dingbatsByHex[dingbat["Typeface name"] + "_" + dingbat["Dingbat hex"]] = scalarValue;
 }
 
-interface Input {
-    typeface: string;
-    hex: string;
+export function hex(typeface: string, hex: string): UnicodeScalarValue | undefined {
+    return dingbatsByHex[typeface + "_" + hex.toUpperCase()];
 }
 
-export default function dingbatToUnicode(input: Input) {
-    return dingbatsByHex[input.typeface + "_" + input.hex.toUpperCase()];
+export function dec(typeface: string, dec: string): UnicodeScalarValue | undefined {
+    return dingbatsByDec[typeface + "_" + dec];
 }
