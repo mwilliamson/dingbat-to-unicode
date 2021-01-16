@@ -70,11 +70,6 @@ assert.strictEqual(result.codePoint, 0x2707);
 
 ```javascript
 const result = dingbatToUnicode.hex("Wingdings", "29")!!;
-assert.strictEqual(result.codePoint, 0x2706);
-```
-
-```javascript
-const result = dingbatToUnicode.hex("Wingdings", "29")!!;
 assert.strictEqual(result.string, "\u2706");
 ```
 
