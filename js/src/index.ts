@@ -16,10 +16,14 @@ for (const dingbat of dingbats) {
     dingbatsByHex[dingbat["Typeface name"] + "_" + dingbat["Dingbat hex"]] = scalarValue;
 }
 
-export function hex(typeface: string, hex: string): UnicodeScalarValue | undefined {
-    return dingbatsByHex[typeface + "_" + hex.toUpperCase()];
+export function codePoint(typeface: string, codePoint: number): UnicodeScalarValue | undefined {
+    return dingbatsByDec[typeface + "_" + codePoint];
 }
 
 export function dec(typeface: string, dec: string): UnicodeScalarValue | undefined {
     return dingbatsByDec[typeface + "_" + dec];
+}
+
+export function hex(typeface: string, hex: string): UnicodeScalarValue | undefined {
+    return dingbatsByHex[typeface + "_" + hex.toUpperCase()];
 }
