@@ -4,6 +4,9 @@
   "description": "Mapping from Dingbat fonts, such as Symbol, Webdings and Wingdings, to Unicode code points",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "prepare": "tsc",
     "test": "mocha --ui exports --require ts-node/register 'test/**/*.ts'"
