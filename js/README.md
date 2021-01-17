@@ -16,7 +16,7 @@ You should subtract 0xF000 from the code point before passing it into this libra
 
 ## Installation
 
-    pip install dingbat-to-unicode
+    npm install dingbat-to-unicode
 
 ## Usage
 
