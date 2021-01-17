@@ -1,6 +1,6 @@
 {
   "name": "dingbat-to-unicode",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Mapping from Dingbat fonts, such as Symbol, Webdings and Wingdings, to Unicode code points",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
