@@ -18,7 +18,7 @@ def _main():
             typescript_file.write(",\n")
 
         typescript_file.write("];\n")
-        typescript_file.write("export default dingbats;");
+        typescript_file.write("export default dingbats;\n");
 
 
 def _read_dingbats():
