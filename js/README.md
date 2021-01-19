@@ -6,7 +6,7 @@ The following fonts are supported:
 
 * Symbol
 * Webdings
-* Wingdings 1
+* Wingdings
 * Wingdings 2
 * Wingdings 3
 
