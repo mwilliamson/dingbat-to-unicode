@@ -7,19 +7,25 @@ _root = os.path.dirname(__file__)
 
 
 def _main():
+    dingbats = _read_dingbats()
+
+    with open(os.path.join(_root, "js/src/dingbats.ts"), "wt", encoding="utf-8") as typescript_file:
+        typescript_file.write("const dingbats = [\n")
+
+        for dingbat in dingbats:
+            typescript_file.write("    ")
+            json.dump(dingbat, typescript_file)
+            typescript_file.write(",\n")
+
+        typescript_file.write("];\n")
+        typescript_file.write("export default dingbats;");
+
+
+def _read_dingbats():
     with open(os.path.join(_root, "dingbats.csv")) as dingbats_file:
         dingbat_reader = csv.DictReader(dingbats_file)
 
-        with open(os.path.join(_root, "js/src/dingbats.ts"), "wt", encoding="utf-8") as typescript_file:
-            typescript_file.write("const dingbats = [\n")
-
-            for dingbat in dingbat_reader:
-                typescript_file.write("    ")
-                json.dump(dingbat, typescript_file)
-                typescript_file.write(",\n")
-
-            typescript_file.write("];\n")
-            typescript_file.write("export default dingbats;");
+        return list(dingbat_reader)
 
 
 if __name__ == "__main__":
