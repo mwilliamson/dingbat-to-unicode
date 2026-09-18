@@ -9,18 +9,22 @@ const dingbatsByCodePoint: {[key: string]: UnicodeScalarValue} = {};
 
 const fromCodePoint = String.fromCodePoint ? String.fromCodePoint : fromCodePointPolyfill;
 
-for (const dingbat of dingbats) {
-    const codePoint = parseInt(dingbat["Unicode dec"], 10);
-    const scalarValue = {
-        codePoint: codePoint,
-        string: fromCodePoint(codePoint),
-    };
-
-    dingbatsByCodePoint[dingbat["Typeface name"].toUpperCase() + "_" + dingbat["Dingbat dec"]] = scalarValue;
-}
-
 export function codePoint(typeface: string, codePoint: number): UnicodeScalarValue | undefined {
-    return dingbatsByCodePoint[typeface.toUpperCase() + "_" + codePoint];
+    const codePointMap = dingbats[typeface.toUpperCase()];
+
+    if (codePointMap === undefined) {
+        return undefined;
+    }
+
+    const unicodeCodePoint = codePointMap[codePoint];
+    if (unicodeCodePoint === undefined) {
+        return undefined;
+    }
+
+    return {
+        codePoint: unicodeCodePoint,
+        string: fromCodePoint(unicodeCodePoint),
+    };
 }
 
 export function dec(typeface: string, dec: string): UnicodeScalarValue | undefined {

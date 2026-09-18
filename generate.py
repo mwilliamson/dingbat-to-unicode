@@ -39,15 +39,33 @@ def _write_java_fragment(dingbats):
 
 
 def _write_javascript_module(dingbats):
+    dingbats_by_typeface_name = {}
+
+    for dingbat in dingbats:
+        typeface_name = dingbat["Typeface name"]
+        dingbat_code_point = int(dingbat["Dingbat dec"])
+        unicode_code_point = int(dingbat["Unicode dec"])
+        dingbats_by_typeface_name.setdefault(typeface_name, {})[dingbat_code_point] = unicode_code_point
+
     with _open_text_file("js/src/dingbats.ts") as typescript_file:
-        typescript_file.write("const dingbats = [\n")
+        typescript_file.write("const dingbats: {[typefaceName: string]: {[dingbatCodePoint: string]: number}} = {\n")
 
-        for dingbat in dingbats:
-            typescript_file.write("    ")
-            json.dump(dingbat, typescript_file)
-            typescript_file.write(",\n")
+        for typeface_name, dingbat_to_unicode in dingbats_by_typeface_name.items():
+            typescript_file.write(" " * 4)
+            json.dump(typeface_name.upper(), typescript_file)
+            typescript_file.write(": {\n")
 
-        typescript_file.write("];\n")
+            for dingbat_code_point, unicode_code_point in dingbat_to_unicode.items():
+                typescript_file.write(" " * 8)
+                typescript_file.write(str(dingbat_code_point))
+                typescript_file.write(": ")
+                typescript_file.write(str(unicode_code_point))
+                typescript_file.write(",\n")
+
+            typescript_file.write(" " * 4)
+            typescript_file.write("},\n")
+
+        typescript_file.write("};\n")
         typescript_file.write("export default dingbats;\n");
 
 
